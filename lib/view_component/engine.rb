@@ -92,10 +92,13 @@ module ViewComponent
           get "#{options.preview_route}/*path", to: "view_components#previews", as: :preview_view_component, internal: true
         end
       end
-
-      app.executor.to_run :before do
-        CompileCache.invalidate! unless ActionView::Base.cache_template_loading
+      
+      if Rails.version.to_f >= 5.0
+        app.executor.to_run :before do
+          CompileCache.invalidate! unless ActionView::Base.cache_template_loading
+        end
       end
+
     end
   end
 end

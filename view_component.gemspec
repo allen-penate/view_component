@@ -29,15 +29,18 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.3.0"
 
-  spec.add_runtime_dependency     "activesupport", [">= 5.0.0", "< 7.0"]
+  spec.add_runtime_dependency     "activesupport", [">= 4.2.11.1", "< 7.0"]
   spec.add_development_dependency "bundler", "~> 1.14"
-  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rake", "~> 10.5"
   spec.add_development_dependency "minitest", "= 5.6.0"
-  spec.add_development_dependency "haml", "~> 5"
-  spec.add_development_dependency "slim", "~> 4.0"
+  spec.add_development_dependency "haml"
+  spec.add_development_dependency "slim"
+  spec.add_development_dependency 'pry', '0.10.4'
+  spec.add_development_dependency 'pry-nav', '0.2.4'
+  spec.add_development_dependency 'pry-rails', '0.3.6'
   spec.add_development_dependency "better_html", "~> 1"
-  spec.add_development_dependency "rubocop", "= 0.74"
-  spec.add_development_dependency "rubocop-github", "~> 0.13.0"
-  spec.add_development_dependency "simplecov", "~> 0.18.0"
+  # spec.add_development_dependency "rubocop", "= 0.74"
+  # spec.add_development_dependency "rubocop-github", "~> 0.13.0"
+  spec.add_development_dependency "simplecov", "~> 0.14.1"
   spec.add_development_dependency "simplecov-erb", "~> 0.1"
 end

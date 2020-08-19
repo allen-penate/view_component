@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "action_view"
+require "pry"
 require "active_support/configurable"
 require "view_component/collection"
 require "view_component/compile_cache"
@@ -231,10 +232,10 @@ module ViewComponent
 
         # Remove any existing singleton methods,
         # as Ruby warns when redefining a method.
-        remove_possible_singleton_method(:variants)
-        remove_possible_singleton_method(:collection_parameter)
-        remove_possible_singleton_method(:collection_counter_parameter)
-        remove_possible_singleton_method(:counter_argument_present?)
+        singleton_class.remove_possible_method(:variants)
+        singleton_class.remove_possible_method(:collection_parameter)
+        singleton_class.remove_possible_method(:collection_counter_parameter)
+        singleton_class.remove_possible_method(:counter_argument_present?)
 
         define_singleton_method(:variants) do
           templates.map { |template| template[:variant] } + variants_from_inline_calls(inline_calls)
@@ -435,9 +436,8 @@ module ViewComponent
             if templates.find { |template| template[:variant].nil? } && inline_calls_defined_on_self.include?(:call)
               errors << "Template file and inline render method found for #{self}. There can only be a template file or inline render method per component."
             end
-
             duplicate_template_file_and_inline_variant_calls =
-              templates.pluck(:variant) & variants_from_inline_calls(inline_calls_defined_on_self)
+              templates.collect{|item| item[:variant]} & variants_from_inline_calls(inline_calls_defined_on_self)
 
             unless duplicate_template_file_and_inline_variant_calls.empty?
               count = duplicate_template_file_and_inline_variant_calls.count
