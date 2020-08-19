@@ -2,8 +2,7 @@
 
 source "https://rubygems.org"
 gemspec
+rails_version = "#{ENV['GEMFILE_RAILS_VERSION'] || '4.2.11.1'}"
 
-rails_version = "#{ENV['RAILS_VERSION'] || '6.0.3.2'}"
-
-gem "capybara", "~> 3"
+gem "capybara", "~> 2"
 gem "rails", rails_version == "master" ? { github: "rails/rails" } : rails_version
