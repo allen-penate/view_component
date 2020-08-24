@@ -35,7 +35,7 @@ module ViewComponent
     end
 
     def request
-      @request ||= ActionDispatch::TestRequest.create
+      @request ||= (Rails.version.to_f >= 5.0) ? ActionDispatch::TestRequest.create : ActionDispatch::TestRequest.new
     end
 
     def with_variant(variant)
