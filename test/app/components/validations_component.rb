@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+require 'view_component/validations'
 
 class ValidationsComponent < ViewComponent::Base
-  include ActiveModel::Validations
+  include ViewComponent::Validations
 
   validates :content, presence: true
 
